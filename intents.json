@@ -1,0 +1,94 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening", "Howdy", "What's up", "Greetings"],
+      "responses": [
+        "Hello! Welcome to Customer Support. How can I help you today?",
+        "Hi there! I am your virtual support assistant. What can I help you with?",
+        "Hey! Welcome. Ask me anything about orders, refunds, payments or your account!"
+      ]
+    },
+    {
+      "tag": "order_tracking",
+      "patterns": ["Where is my order", "Track my order", "Order status", "Where is my package", "Track my shipment", "When will my order arrive", "Delivery status"],
+      "responses": [
+        "To track your order, visit our website and enter your Order ID in the Track Order section.",
+        "Your tracking number was sent to your email. Use it on our website under My Orders.",
+        "Please share your Order ID and I will help you check the delivery status right away."
+      ]
+    },
+    {
+      "tag": "refund_policy",
+      "patterns": ["How do I get a refund", "I want to return my order", "Cancel my order", "Refund policy", "Money back", "I want to cancel", "Return product", "Exchange item"],
+      "responses": [
+        "You can return items within 30 days of delivery. Go to My Orders and click Request Return.",
+        "Refunds are processed within 5 to 7 business days after we receive the returned item.",
+        "To cancel: go to My Orders, select the order, and click Cancel. Refund will be processed in 5 days."
+      ]
+    },
+    {
+      "tag": "login_issues",
+      "patterns": ["I forgot my password", "Cannot login", "Account locked", "Reset password", "Login problem", "Cannot sign in", "Lost access to account"],
+      "responses": [
+        "Click Forgot Password on the login page and enter your email. A reset link will be sent in 2 minutes.",
+        "If your account is locked due to multiple failed attempts, please wait 15 minutes and try again.",
+        "To reset: go to login page, click Forgot Password, enter your email, and check your inbox."
+      ]
+    },
+    {
+      "tag": "payment_issues",
+      "patterns": ["Payment failed", "Money deducted but order not placed", "Transaction failed", "Double charged", "Wrong amount charged", "UPI failed", "Card declined"],
+      "responses": [
+        "If money was deducted but order was not placed, it will be auto refunded in 3 to 5 business days.",
+        "For payment issues please share your transaction ID. Our billing team resolves it within 24 hours.",
+        "Payment failures happen due to bank or network errors. Try a different payment method or contact your bank."
+      ]
+    },
+    {
+      "tag": "product_inquiry",
+      "patterns": ["What is the price", "Is this available", "Product details", "Tell me about this product", "Is it in stock", "How much does it cost", "Product specification"],
+      "responses": [
+        "Search for the product on our website for full specifications, pricing and availability.",
+        "Our catalog has up to date pricing and stock information. Visit our website to compare products.",
+        "For product details visit our website or app where you can read reviews and check current offers."
+      ]
+    },
+    {
+      "tag": "complaint",
+      "patterns": ["I received a damaged product", "Wrong item delivered", "Product not working", "I want to raise a complaint", "Defective product", "Item is broken", "Poor quality"],
+      "responses": [
+        "Sorry to hear that! Go to My Orders, select the item and click Report Issue. We respond in 24 hours.",
+        "We apologize for this. Please share your order number and photos of the issue for fastest resolution.",
+        "For damaged or wrong products go to My Orders and click Report Issue. We will arrange free replacement."
+      ]
+    },
+    {
+      "tag": "business_hours",
+      "patterns": ["What are your working hours", "When are you open", "Support timing", "Customer care number", "How to contact support", "Are you available on Sunday"],
+      "responses": [
+        "We are available Monday to Saturday 9 AM to 9 PM. Email us at support@company.com anytime.",
+        "Support hours are Mon to Sat 9 AM to 9 PM and Sunday 10 AM to 6 PM.",
+        "Live support is available 9 AM to 9 PM on weekdays. This chatbot is available 24 hours a day."
+      ]
+    },
+    {
+      "tag": "farewell",
+      "patterns": ["Bye", "Goodbye", "Thank you", "Thanks", "That is all", "See you", "No more questions", "Done"],
+      "responses": [
+        "Thank you for reaching out! Have a wonderful day. Feel free to return anytime.",
+        "Goodbye! We hope your issue was resolved. Do not hesitate to contact us again.",
+        "Thanks for contacting support! Your satisfaction matters to us. Have a great day!"
+      ]
+    },
+    {
+      "tag": "tracking_id_received",
+      "patterns": [],
+      "responses": [
+        "Thank you for sharing your tracking ID. Our system shows your order is currently being processed and will be delivered within 2 to 3 business days.",
+        "Got your tracking ID! Your package is on its way and is currently out for delivery. You will receive an SMS update shortly.",
+        "Thank you! Your order has been dispatched and is expected to arrive by tomorrow. You can also track it on our website."
+      ]
+    }
+  ]
+}

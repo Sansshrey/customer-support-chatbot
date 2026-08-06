@@ -1,0 +1,7 @@
+# Customer Support Chatbot 
+# No external dependencies required
+# Uses Python Standard Library only:
+# - re        (Regular Expressions for pattern matching)
+# - string    (Punctuation removal)
+# - random    (Response variation)
+# - datetime  (Session tracking)
