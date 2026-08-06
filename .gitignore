@@ -1,9 +1,24 @@
 # Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
 # Virtual environment
 .venv/
+venv/
+env/
+
+# Environment variables
+.env
 
 # Logs
 chat_logs.txt
+*.log
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
