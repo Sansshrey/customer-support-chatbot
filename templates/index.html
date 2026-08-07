@@ -463,107 +463,126 @@ function addMessage(text,type){
 
 async function sendMessage(){
 
-
-let input=document.getElementById(
-    "messageInput"
-);
-
-
-let message=input.value.trim();
+    let input = document.getElementById(
+        "messageInput"
+    );
 
 
-
-if(!message)
-return;
+    let message = input.value.trim();
 
 
-
-addMessage(
-    message,
-    "user"
-);
+    if(!message)
+        return;
 
 
-
-input.value="";
-
-
-
-let typing=document.createElement(
-    "div"
-);
+    addMessage(
+        message,
+        "user"
+    );
 
 
-typing.className="typing";
-
-typing.innerHTML=
-"🤖 Typing...";
+    input.value = "";
 
 
-document.getElementById(
-    "chatBox"
-).appendChild(typing);
+    let typing = document.createElement(
+        "div"
+    );
+
+
+    typing.className = "typing";
+
+
+    typing.innerHTML =
+        "🤖 Typing...";
+
+
+    document.getElementById(
+        "chatBox"
+    ).appendChild(typing);
 
 
 
-let response=await fetch(
-"/chat",
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":
-"application/json"
-
-},
+    try {
 
 
-body:JSON.stringify({
+        let response = await fetch(
+            "/api",
+            {
 
-message:message,
+                method: "POST",
 
-user_id:userId
+                headers: {
 
-})
+                    "Content-Type":
+                    "application/json"
 
-
-});
-
-
-
-let data=await response.json();
+                },
 
 
+                body: JSON.stringify({
 
-typing.remove();
+                    message: message,
+
+                    user_id: userId
+
+                })
+
+            }
+        );
 
 
 
-addMessage(
-    data.response,
-    "bot"
-);
+        let data = await response.json();
 
+
+
+        typing.remove();
+
+
+
+        addMessage(
+            data.response,
+            "bot"
+        );
+
+
+    }
+
+
+    catch(error){
+
+
+        typing.remove();
+
+
+        addMessage(
+            "Sorry, something went wrong. Please try again.",
+            "bot"
+        );
+
+
+        console.log(error);
+
+    }
 
 
 }
+
 
 
 
 function quickSend(text){
 
-document.getElementById(
-"messageInput"
-).value=text;
+
+    document.getElementById(
+        "messageInput"
+    ).value = text;
 
 
-sendMessage();
+    sendMessage();
+
 
 }
-
-
 
 </script>
 
