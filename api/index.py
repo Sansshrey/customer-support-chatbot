@@ -5,32 +5,39 @@ import string
 import random
 import os
 from datetime import datetime
-from dotenv import load_dotenv
+from pathlib import Path
 
 
-# Load environment variables
-load_dotenv()
+app = Flask(
+    __name__,
+    template_folder="../templates"
+)
 
 
-app = Flask(__name__)
+# -----------------------------
+# Load intents.json
+# -----------------------------
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load intents JSON
-
-with open("intents.json", "r") as f:
+with open(BASE_DIR / "intents.json", "r") as f:
     data = json.load(f)
 
 
 INTENTS = data["intents"]
 
 
+# -----------------------------
 # User session memory
-# Stores last intent for each user
+# -----------------------------
 
 sessions = {}
 
 
+
+# -----------------------------
 # NLP preprocessing
+# -----------------------------
 
 STOPWORDS = {
     "is", "the", "a", "an", "and", "or", "but",
@@ -48,6 +55,7 @@ STOPWORDS = {
 }
 
 
+
 def preprocess(text):
 
     text = text.lower()
@@ -58,6 +66,7 @@ def preprocess(text):
 
     tokens = text.split()
 
+
     tokens = [
         word for word in tokens
         if word not in STOPWORDS
@@ -67,7 +76,9 @@ def preprocess(text):
 
 
 
+# -----------------------------
 # Intent Detection
+# -----------------------------
 
 def detect_intent(user_input, user_id):
 
@@ -85,10 +96,9 @@ def detect_intent(user_input, user_id):
     # Detect IDs
 
     if re.match(
-        r'^[A-Za-z0-9]{4,}$',
+        r"^[A-Za-z0-9]{4,}$",
         user_input.strip()
     ):
-
 
         if previous_intent == "payment_issues":
             return "transaction_id_received"
@@ -103,6 +113,7 @@ def detect_intent(user_input, user_id):
 
 
     best_tag = "unknown"
+
     best_score = 0
 
 
@@ -118,7 +129,8 @@ def detect_intent(user_input, user_id):
 
 
             matches = sum(
-                1 for token in pattern_tokens
+                1
+                for token in pattern_tokens
                 if token in tokens
             )
 
@@ -140,6 +152,7 @@ def detect_intent(user_input, user_id):
 
 
     if best_score >= 1:
+
         return best_tag
 
 
@@ -147,7 +160,9 @@ def detect_intent(user_input, user_id):
 
 
 
+# -----------------------------
 # Responses
+# -----------------------------
 
 
 UNKNOWN_RESPONSES = [
@@ -157,7 +172,9 @@ UNKNOWN_RESPONSES = [
     "I am not sure about that. Please contact support for further assistance.",
 
     "I can help with orders, payments, refunds and login issues."
+
 ]
+
 
 
 TRANSACTION_RESPONSES = [
@@ -167,7 +184,9 @@ TRANSACTION_RESPONSES = [
     "Got your transaction ID. Our billing team will investigate and process any refund if applicable.",
 
     "Your transaction ID has been recorded. Refunds are processed within 3 to 5 business days."
+
 ]
+
 
 
 TRACKING_RESPONSES = [
@@ -177,17 +196,20 @@ TRACKING_RESPONSES = [
     "Got your tracking ID. Your package status has been updated.",
 
     "Your order has been dispatched and will arrive soon."
+
 ]
 
 
 
 def get_response(tag):
 
+
     if tag == "transaction_id_received":
 
         return random.choice(
             TRANSACTION_RESPONSES
         )
+
 
 
     if tag == "tracking_id_received":
@@ -213,8 +235,10 @@ def get_response(tag):
 
 
 
+# -----------------------------
 # Logging
-
+# Vercel compatible
+# -----------------------------
 
 def save_log(
         user_msg,
@@ -223,34 +247,27 @@ def save_log(
         user_id
 ):
 
-    with open(
-        "chat_logs.txt",
-        "a"
-    ) as f:
+    timestamp = datetime.now().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
 
 
-        timestamp = datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
+    print(
+        f"""
+[{timestamp}]
+USER {user_id}: {user_msg}
 
+BOT [{tag}]: {bot_reply}
 
-        f.write(
-            f"[{timestamp}] USER {user_id}: {user_msg}\n"
-        )
-
-
-        f.write(
-            f"[{timestamp}] BOT [{tag}]: {bot_reply}\n"
-        )
-
-
-        f.write(
-            "-" * 50 + "\n"
-        )
+------------------------
+"""
+    )
 
 
 
+# -----------------------------
 # Routes
+# -----------------------------
 
 
 @app.route("/")
@@ -267,7 +284,6 @@ def home():
     methods=["POST"]
 )
 def chat():
-
 
     data = request.json
 
@@ -304,8 +320,6 @@ def chat():
     )
 
 
-    # Update memory
-
     sessions[user_id]["last_intent"] = tag
 
 
@@ -331,14 +345,10 @@ def chat():
 
 
 
+# Vercel needs this
 if __name__ == "__main__":
 
     app.run(
         host="0.0.0.0",
-        port=int(
-            os.environ.get(
-                "PORT",
-                5000
-            )
-        )
+        port=5000
     )
