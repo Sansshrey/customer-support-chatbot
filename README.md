@@ -216,4 +216,4 @@ This project is developed for learning and demonstration purposes.
 
 You can try the live chatbot here:
 
-[Live Demo](https://customer-support-chatbot-u5j8.onrender.com/)
+[Live Demo](https://customer-support-chatbot-sanskriti7.vercel.app/)
