@@ -1,0 +1,17 @@
+[
+    {
+        "refund_id": "REF1001",
+        "customer_id": "C101",
+        "status": "Processing",
+        "amount": "₹2500",
+        "days": "3-5 business days"
+    },
+
+    {
+        "refund_id": "REF2002",
+        "customer_id": "C102",
+        "status": "Completed",
+        "amount": "₹1500",
+        "days": "Completed"
+    }
+]

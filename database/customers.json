@@ -1,0 +1,16 @@
+[
+    {
+        "customer_id": "C101",
+        "name": "Rahul Sharma",
+        "email": "rahul@gmail.com",
+        "phone": "9876543210"
+    },
+
+
+    {
+        "customer_id": "C102",
+        "name": "Priya Singh",
+        "email": "priya@gmail.com",
+        "phone": "9123456780"
+    }
+]

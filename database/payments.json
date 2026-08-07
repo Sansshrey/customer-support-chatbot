@@ -1,0 +1,16 @@
+[
+    {
+        "transaction_id": "TXN12345",
+        "customer_id": "C101",
+        "status": "Failed",
+        "amount": "₹2500",
+        "message": "Payment failed due to bank verification issue."
+    },
+    {
+        "transaction_id": "TXN67890",
+        "customer_id": "C102",
+        "status": "Success",
+        "amount": "₹1500",
+        "message": "Payment completed successfully."
+    }
+]

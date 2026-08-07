@@ -1,0 +1,27 @@
+[
+    {
+        "order_id": "AG657894",
+        "customer_id": "C101",
+        "status": "Out for delivery",
+        "delivery": "Tomorrow",
+        "product": "Laptop"
+    },
+
+
+    {
+        "order_id": "AG123456",
+        "customer_id": "C101",
+        "status": "Delivered",
+        "delivery": "5 August 2026",
+        "product": "Headphones"
+    },
+
+
+    {
+        "order_id": "BK987654",
+        "customer_id": "C102",
+        "status": "Processing",
+        "delivery": "10 August 2026",
+        "product": "Mobile Phone"
+    }
+]

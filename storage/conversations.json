@@ -1,0 +1,44 @@
+[
+    {
+        "timestamp": "2026-08-07 13:59:27",
+        "user": null,
+        "message": "I want refund",
+        "intent": "authentication_required",
+        "response": "Before accessing your details, please provide your registered email address."
+    },
+    {
+        "timestamp": "2026-08-07 13:59:35",
+        "user": null,
+        "message": "rahul@gmail.com",
+        "intent": "authentication",
+        "response": "Authentication successful. Welcome Rahul Sharma."
+    },
+    {
+        "timestamp": "2026-08-07 13:59:37",
+        "user": null,
+        "message": "I want refund",
+        "intent": "refund_request",
+        "response": "Please provide your refund ID to check refund status."
+    },
+    {
+        "timestamp": "2026-08-07 14:00:16",
+        "user": null,
+        "message": "REF1001",
+        "intent": "refund_id_received",
+        "response": "Refund REF1001 is Processing. Amount: \u20b92500. Expected time: 3-5 business days."
+    },
+    {
+        "timestamp": "2026-08-07 14:00:18",
+        "user": null,
+        "message": "ok",
+        "intent": "confirmation",
+        "response": "You're welcome. Is there anything else I can help you with?"
+    },
+    {
+        "timestamp": "2026-08-07 14:00:19",
+        "user": null,
+        "message": "no",
+        "intent": "goodbye",
+        "response": "Thank you for contacting Customer Support AI Agent. Have a great day!"
+    }
+]

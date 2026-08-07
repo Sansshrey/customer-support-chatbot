@@ -1,0 +1,14 @@
+{
+    "null": {
+        "customer_id": "C101",
+        "customer_name": null,
+        "email": "rahul@gmail.com",
+        "auth_status": "verified",
+        "pending_action": "refund_request",
+        "waiting_for": null,
+        "order_id": null,
+        "transaction_id": null,
+        "refund_id": "REF1001",
+        "name": "Rahul Sharma"
+    }
+}
