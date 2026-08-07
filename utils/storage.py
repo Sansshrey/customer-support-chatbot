@@ -1,137 +1,91 @@
 import json
-from pathlib import Path
+import os
 from datetime import datetime
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# In-memory storage for Vercel
+sessions = {}
 
-
-STORAGE_DIR = BASE_DIR / "storage"
-
-
-SESSION_FILE = STORAGE_DIR / "sessions.json"
-
-LOG_FILE = STORAGE_DIR / "conversations.json"
-
-
-
-# Create storage folder automatically
-
-STORAGE_DIR.mkdir(
-    exist_ok=True
-)
-
+conversations = []
 
 
 def load_sessions():
 
-
-    if not SESSION_FILE.exists():
-
-        with open(
-            SESSION_FILE,
-            "w",
-            encoding="utf-8"
-        ) as file:
-
-            json.dump(
-                {},
-                file
-            )
-
-
-        return {}
-
-
-
-    with open(
-        SESSION_FILE,
-        "r",
-        encoding="utf-8"
-    ) as file:
-
-        return json.load(file)
-
+    return sessions
 
 
 
 def save_sessions(data):
 
+    global sessions
 
-    with open(
-        SESSION_FILE,
-        "w",
-        encoding="utf-8"
-    ) as file:
+    sessions = data
 
-
-        json.dump(
-            data,
-            file,
-            indent=4
-        )
+    return True
 
 
 
+def get_user_session(user_id):
 
+    if user_id not in sessions:
+
+        sessions[user_id] = {
+
+            "authenticated": False,
+            "name": None,
+            "email": None,
+            "current_intent": None,
+            "order_id": None,
+            "transaction_id": None,
+            "refund_id": None
+
+        }
+
+    return sessions[user_id]
+
+
+
+def update_user_session(user_id, key, value):
+
+    session = get_user_session(user_id)
+
+    session[key] = value
+
+    sessions[user_id] = session
+
+    return session
+
+
+
+# Keep this because index.py imports it
 
 def save_conversation(
-        user,
-        message,
-        intent,
-        response
+        user_id,
+        user_message,
+        bot_response,
+        intent
 ):
 
+    conversations.append({
 
-    if LOG_FILE.exists():
+        "user_id": user_id,
 
-        with open(
-            LOG_FILE,
-            "r",
-            encoding="utf-8"
-        ) as file:
+        "user_message": user_message,
 
-            logs = json.load(file)
+        "bot_response": bot_response,
 
+        "intent": intent,
 
-    else:
-
-        logs = []
-
-
-
-    logs.append({
-
-        "timestamp":
-        datetime.now().strftime(
+        "timestamp": datetime.now().strftime(
             "%Y-%m-%d %H:%M:%S"
-        ),
-
-        "user":
-        user,
-
-        "message":
-        message,
-
-        "intent":
-        intent,
-
-        "response":
-        response
+        )
 
     })
 
+    return True
 
 
-    with open(
-        LOG_FILE,
-        "w",
-        encoding="utf-8"
-    ) as file:
 
+def get_conversations():
 
-        json.dump(
-            logs,
-            file,
-            indent=4
-        )
+    return conversations
